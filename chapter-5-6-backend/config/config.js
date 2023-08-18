@@ -8,13 +8,7 @@ const {
   DATABASE_HOST,
 } = process.env;
 
-if (
-  !DATABASE_URL ||
-  !DATABASE_USERNAME ||
-  !DATABASE_PASSWORD ||
-  !DATABASE_NAME ||
-  !DATABASE_HOST
-) {
+if (!DATABASE_URL || !DATABASE_USERNAME || !DATABASE_NAME || !DATABASE_HOST) {
   throw new Error("Env is required");
 }
 

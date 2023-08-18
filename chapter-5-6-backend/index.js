@@ -60,6 +60,8 @@ const authorization = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "Your token is not valid";
     }
@@ -115,6 +117,8 @@ app.post("/api/v1/auth/register", async (req, res) => {
 
     res.status(201).json({ data: { token } });
   } catch (error) {
+    console.error(error);
+
     if (error.message === "Validation error") {
       return res.status(400).json({ message: "User has already registered" });
     }
@@ -157,6 +161,8 @@ app.post("/api/v1/auth/login", async (req, res) => {
 
     res.status(200).json({ data: { token } });
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "Internal Server Error";
     }
@@ -169,6 +175,8 @@ app.get("/api/v1/auth/me", authorization, async (req, res) => {
   try {
     return res.status(200).json({ data: req.user });
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "Your token is not valid";
     }
@@ -204,6 +212,8 @@ app.post("/api/v1/auth/google", async (req, res) => {
 
     res.status(200).json({ data: { token } });
   } catch (error) {
+    console.error(error);
+
     let status = 500;
 
     if (NODE_ENV === "production") {
@@ -223,6 +233,8 @@ app.get("/api/docs", (req, res, next) => {
   try {
     res.redirect("https://documenter.getpostman.com/view/3884681/2s93Y6uKiP");
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "internal server error";
     }
@@ -231,7 +243,7 @@ app.get("/api/docs", (req, res, next) => {
   }
 });
 
-app.get("/api/v1/movie/popular", async (req, res, next) => {
+app.get("/api/v1/movie/popular", authorization, async (req, res, next) => {
   try {
     let { page } = req.query;
     const pageURL = page ? `&page=${page}` : ``;
@@ -247,6 +259,8 @@ app.get("/api/v1/movie/popular", async (req, res, next) => {
 
     return res.status(200).json({ data, page, total_pages, total_results });
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "internal server error";
     }
@@ -268,6 +282,8 @@ app.get("/api/v1/movie/:movie_id", authorization, async (req, res, next) => {
 
     return res.status(200).json({ data: response.data });
   } catch (error) {
+    console.error(error);
+
     let status = 500;
 
     if (NODE_ENV === "production") {
@@ -283,7 +299,7 @@ app.get("/api/v1/movie/:movie_id", authorization, async (req, res, next) => {
   }
 });
 
-app.get("/api/v1/search/movie", async (req, res, next) => {
+app.get("/api/v1/search/movie", authorization, async (req, res, next) => {
   try {
     let { page, query } = req.query;
     const pageURL = page ? `&page=${page}` : ``;
@@ -303,6 +319,8 @@ app.get("/api/v1/search/movie", async (req, res, next) => {
 
     return res.status(200).json({ data, page, total_pages, total_results });
   } catch (error) {
+    console.error(error);
+
     if (NODE_ENV === "production") {
       error.message = "internal server error";
     }
