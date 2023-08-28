@@ -231,7 +231,7 @@ app.post("/api/v1/auth/google", async (req, res) => {
 
 app.get("/api/docs", (req, res, next) => {
   try {
-    res.redirect("https://documenter.getpostman.com/view/3884681/2s93Y6uKiP");
+    res.redirect("https://documenter.getpostman.com/view/20451580/2s9Y5YSi6s");
   } catch (error) {
     console.error(error);
 
