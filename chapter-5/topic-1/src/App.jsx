@@ -11,9 +11,7 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <GoogleOAuthProvider
-      clientId={import.meta.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-    >
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID}>
       <BrowserRouter>
         <Header />
 

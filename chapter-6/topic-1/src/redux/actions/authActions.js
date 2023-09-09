@@ -12,7 +12,7 @@ export const registerLoginWithGoogle =
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: `${import.meta.env.REACT_APP_API}/v1/auth/google`,
+        url: `${import.meta.env.VITE_API}/v1/auth/google`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,7 +57,7 @@ export const getMe =
       if (!token) return;
 
       const response = await axios.get(
-        `${import.meta.env.REACT_APP_API}/v1/auth/me`,
+        `${import.meta.env.VITE_API}/v1/auth/me`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ export const login = (data, navigate) => async (dispatch) => {
   try {
     let config = {
       method: "post",
-      url: `${import.meta.env.REACT_APP_API}/v1/auth/login`,
+      url: `${import.meta.env.VITE_API}/v1/auth/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -121,7 +121,7 @@ export const register = (data, navigate) => async (dispatch) => {
   try {
     let config = {
       method: "post",
-      url: `${import.meta.env.REACT_APP_API}/v1/auth/register`,
+      url: `${import.meta.env.VITE_API}/v1/auth/register`,
       headers: {
         "Content-Type": "application/json",
       },

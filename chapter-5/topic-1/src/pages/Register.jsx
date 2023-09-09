@@ -24,7 +24,7 @@ function Register() {
 
       let config = {
         method: "post",
-        url: `${import.meta.env.REACT_APP_API}/v1/auth/register`,
+        url: `${import.meta.env.VITE_API}/v1/auth/register`,
         headers: {
           "Content-Type": "application/json",
         },

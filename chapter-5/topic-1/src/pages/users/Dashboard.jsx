@@ -12,7 +12,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `${import.meta.env.REACT_APP_API}/v1/auth/me`,
+          `${import.meta.env.VITE_API}/v1/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

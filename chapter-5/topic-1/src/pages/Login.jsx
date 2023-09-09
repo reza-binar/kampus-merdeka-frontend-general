@@ -22,7 +22,7 @@ function Login() {
 
       let config = {
         method: "post",
-        url: `${import.meta.env.REACT_APP_API}/v1/auth/login`,
+        url: `${import.meta.env.VITE_API}/v1/auth/login`,
         headers: {
           "Content-Type": "application/json",
         },
