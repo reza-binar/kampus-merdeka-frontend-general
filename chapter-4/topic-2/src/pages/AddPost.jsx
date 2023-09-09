@@ -27,7 +27,11 @@ function AddPost() {
 
       return navigate("/");
     } catch (error) {
-      toast.error(error?.message);
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+        return;
+      }
+      toast.error(error.message);
     }
   };
 

@@ -17,7 +17,11 @@ export const getAllMessages = () => async (dispatch) => {
     // Dispatch to reducers
     dispatch(getAllMessagesReducer(data.data));
   } catch (error) {
-    throw error;
+    if (axios.isAxiosError(error)) {
+      toast.error(error.response.data.message);
+      return;
+    }
+    toast.error(error.message);
   }
 };
 
@@ -46,7 +50,11 @@ export const createNewMessage = (message) => async (dispatch, getState) => {
 
     dispatch(createNewMessageReducer(data.data));
   } catch (error) {
-    throw error;
+    if (axios.isAxiosError(error)) {
+      toast.error(error.response.data.message);
+      return;
+    }
+    toast.error(error.message);
   }
 };
 
@@ -71,6 +79,10 @@ export const addMessageFromWebsocket =
       // Make new message to reducer
       dispatch(createNewMessageReducer(messageData));
     } catch (error) {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+        return;
+      }
+      toast.error(error.message);
     }
   };

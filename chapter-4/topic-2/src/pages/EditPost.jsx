@@ -32,7 +32,11 @@ function EditPost() {
 
       return navigate("/");
     } catch (error) {
-      toast.error(error?.message);
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+        return;
+      }
+      toast.error(error.message);
     }
   };
 
@@ -46,8 +50,12 @@ function EditPost() {
         setBody(response?.data?.body);
         setUserId(response?.data?.userId);
       } catch (error) {
-        if (error?.response?.status === 404) return navigate("/");
-        toast.error(error?.message);
+        if (axios.isAxiosError(error)) {
+          if (error?.response?.status === 404) return navigate("/");
+          toast.error(error.response.data.message);
+          return;
+        }
+        toast.error(error.message);
       }
     }
 

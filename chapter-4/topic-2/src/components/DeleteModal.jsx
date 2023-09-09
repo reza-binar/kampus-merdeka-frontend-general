@@ -14,7 +14,11 @@ function DeleteModal({ show, handleClose, id, setReload }) {
       handleClose();
       setReload(true);
     } catch (error) {
-      toast.error(error?.message);
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+        return;
+      }
+      toast.error(error.message);
     }
   };
 
