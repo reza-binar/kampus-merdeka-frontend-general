@@ -8,7 +8,8 @@ EXPOSE $PORT
 WORKDIR /app
 COPY package.json ./
 RUN apk add g++ make py3-pip
-RUN yarn install --production=true && yarn cache clean --force
+RUN npm install -g pnpm
+RUN pnpm install --production=true && pnpm store prune
 RUN apk add --no-cache tini
 COPY . .
-CMD ["yarn", "run", "start"]
+CMD ["pnpm", "run", "start"]
