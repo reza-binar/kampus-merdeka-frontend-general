@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const { Op } = require("sequelize");
 const https = require("https");
 const express = require("express");
 const cors = require("cors");
@@ -214,7 +215,9 @@ app.post("/api/v1/auth/google", async (req, res) => {
         );
         const { sub, email, name } = response.data;
 
-        let user = await User.findOne({ where: { googleId: sub } });
+        let user = await User.findOne({
+            where: { [Op.or]: [{ googleId: sub }, { email }] },
+        });
         if (!user)
             user = await User.create({
                 email,
